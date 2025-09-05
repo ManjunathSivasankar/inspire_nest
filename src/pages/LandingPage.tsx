@@ -22,6 +22,13 @@ import {
 
 const LandingPage = () => {
   const [activeTab, setActiveTab] = useState("consumer");
+  const [showAllConsumer, setShowAllConsumer] = useState(false);
+  const [showAllCorporate, setShowAllCorporate] = useState(false);
+
+  const handleViewAll = (tab) => {
+    if (tab === "consumer") setShowAllConsumer(true);
+    if (tab === "corporate") setShowAllCorporate(true);
+  };
 
   const services = [
     {
@@ -108,24 +115,32 @@ const corporateProducts = [
           {/* Buttons */}
     <div className="flex flex-col sm:flex-row gap-6 justify-center">
       {/* Primary Button - Gradient Glow */}
-      <Button
+<Button
         size="lg"
         className="relative text-lg px-10 py-4 rounded-full
                   bg-gray-100
                   text-gray-700 shadow-xl hover:scale-110 hover:bg-gray-100
                   transition-all duration-300 overflow-hidden"
+        onClick={() => {
+          const section = document.getElementById("wtu");
+          section?.scrollIntoView({ behavior: "smooth" });
+        }}
       >
         <span className="relative z-10">🚀 Explore About Us</span>
         <span className="absolute inset-0 bg-white/20 blur-xl opacity-50 animate-pulse" />
       </Button>
 
-      {/* Secondary Button - Glassmorphic */}
+      {/* View Catalog Button */}
       <Button
         size="lg"
         className="text-lg px-12 py-4 rounded-full font-semibold 
                   bg-white/10 backdrop-blur-lg border border-white/30 
                   text-white shadow-md hover:scale-105 hover:shadow-lg 
                   hover:bg-white/20 transition-all duration-300"
+        onClick={() => {
+          const section = document.getElementById("products");
+          section?.scrollIntoView({ behavior: "smooth" });
+        }}
       >
         📖 View Catalog
       </Button>
@@ -253,71 +268,94 @@ const corporateProducts = [
         </section>
 
       {/* Catalog Section */}
-<section id="products" className="py-24 bg-gray-100">  
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    
-    {/* Section Heading */}
-    <div className="text-center mb-12">
-      <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-4">
-        <span className="bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 bg-clip-text text-transparent">
-          Our Catalog
-        </span>
-      </h2>
-      <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
-        Discover meaningful celebrations & thoughtful gifts designed to connect hearts.
-      </p>
+ <section id="products" className="py-24 bg-gray-100">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section Heading */}
+        <div className="text-center mb-12">
+          <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-4">
+            <span className="bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 bg-clip-text text-transparent">
+              Our Catalog
+            </span>
+          </h2>
+          <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+            Discover meaningful celebrations & thoughtful gifts designed to connect hearts.
+          </p>
+          <p className="mt-6 italic text-primary text-xl font-medium">
+            “Turning Everyday Moments Into Lasting Bonds.”
+          </p>
+        </div>
 
-      {/* Brochure-style quote */}
-      <p className="mt-6 italic text-primary text-xl font-medium">
-        “Turning Everyday Moments Into Lasting Bonds.”
-      </p>
-    </div>
+        {/* Tabs */}
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+          <TabsList className="grid w-full max-w-md mx-auto grid-cols-2 mb-8">
+            <TabsTrigger value="consumer" className="text-sm font-medium">
+              Consumer
+            </TabsTrigger>
+            <TabsTrigger value="corporate" className="text-sm font-medium">
+              Corporate
+            </TabsTrigger>
+          </TabsList>
 
-    {/* Tabs */}
+          {/* Consumer Content */}
+          <TabsContent value="consumer" className="mt-8">
+            <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+              {(showAllConsumer ? consumerProducts : consumerProducts.slice(0, 4)).map(
+                (item, index) => (
+                  <Card
+                    key={index}
+                    className="p-4 text-center shadow-soft hover:shadow-elegant transition-shadow"
+                  >
+                    <CardContent className="pt-4">
+                      <Gift className="h-8 w-8 text-primary mx-auto mb-2" />
+                      <h3 className="font-semibold text-foreground">{item}</h3>
+                    </CardContent>
+                  </Card>
+                )
+              )}
+            </div>
+            {!showAllCorporate && corporateProducts.length > 4 && (
+              <div className="text-center mt-6">
+                <button
+      className="px-6 py-2 border-2 border-blue-600 text-blue-600 font-medium rounded-lg hover:bg-blue-600 hover:text-white transition-colors duration-300"
+                  onClick={() => handleViewAll("corporate")}
+                >
+                  View All
+                </button>
+              </div>
+            )}
+          </TabsContent>
 
-<Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-  <TabsList className="grid w-full max-w-md mx-auto grid-cols-2 mb-8">
-    <TabsTrigger value="consumer" className="text-sm font-medium">
-      Consumer
-    </TabsTrigger>
-    <TabsTrigger value="corporate" className="text-sm font-medium">
-      Corporate
-    </TabsTrigger>
-  </TabsList>
-
-  {/* Consumer Content - visible by default */}
-  <TabsContent value="consumer" className="mt-8">
-    <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-      {consumerProducts.map((item, index) => (
-        <Card key={index} className="p-4 text-center shadow-soft hover:shadow-elegant transition-shadow">
-          <CardContent className="pt-4">
-            <Gift className="h-8 w-8 text-primary mx-auto mb-2" />
-            <h3 className="font-semibold text-foreground">{item}</h3>
-          </CardContent>
-        </Card>
-      ))}
-    </div>
-  </TabsContent>
-
-  {/* Corporate Content */}
-  <TabsContent value="corporate" className="mt-8">
-    <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-      {corporateProducts.map((item, index) => (
-        <Card key={index} className="p-4 text-center shadow-soft hover:shadow-elegant transition-shadow">
-          <CardContent className="pt-4">
-            <Gift className="h-8 w-8 text-primary mx-auto mb-2" />
-            <h3 className="font-semibold text-foreground">{item}</h3>
-          </CardContent>
-        </Card>
-      ))}
-    </div>
-  </TabsContent>
-</Tabs>
-
-  </div>
-</section>
-
-
+          {/* Corporate Content */}
+          <TabsContent value="corporate" className="mt-8">
+            <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+              {(showAllCorporate ? corporateProducts : corporateProducts.slice(0, 4)).map(
+                (item, index) => (
+                  <Card
+                    key={index}
+                    className="p-4 text-center shadow-soft hover:shadow-elegant transition-shadow"
+                  >
+                    <CardContent className="pt-4">
+                      <Gift className="h-8 w-8 text-primary mx-auto mb-2" />
+                      <h3 className="font-semibold text-foreground">{item}</h3>
+                    </CardContent>
+                  </Card>
+                )
+              )}
+            </div>
+            {!showAllCorporate && corporateProducts.length > 4 && (
+              <div className="text-center mt-6">
+                <button
+      className="px-6 py-2 border-2 border-blue-600 text-blue-600 font-medium rounded-lg hover:bg-blue-600 hover:text-white transition-colors duration-300"
+                  onClick={() => handleViewAll("corporate")}
+                >
+                  View All
+                </button>
+              </div>
+            )}
+          </TabsContent>
+        </Tabs>
+      </div>
+    </section>
 
 
 
