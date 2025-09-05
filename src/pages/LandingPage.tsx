@@ -19,6 +19,7 @@ import {
   ExternalLink, 
   PartyPopper
 } from "lucide-react";
+import TrustSection from "../components/TrustSection";
 
 const LandingPage = () => {
   const [activeTab, setActiveTab] = useState("consumer");
@@ -265,6 +266,7 @@ const corporateProducts = [
               })}
             </div>
           </div>
+          <TrustSection />  
         </section>
 
       {/* Catalog Section */}
