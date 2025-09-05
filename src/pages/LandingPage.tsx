@@ -313,11 +313,11 @@ const corporateProducts = [
                 )
               )}
             </div>
-            {!showAllCorporate && corporateProducts.length > 4 && (
+              {!showAllConsumer && consumerProducts.length > 4 && (
               <div className="text-center mt-6">
                 <button
-      className="px-6 py-2 border-2 border-blue-600 text-blue-600 font-medium rounded-lg hover:bg-blue-600 hover:text-white transition-colors duration-300"
-                  onClick={() => handleViewAll("corporate")}
+                  className="px-6 py-2 border-2 border-blue-600 text-blue-600 font-medium rounded-lg hover:bg-blue-600 hover:text-white transition-colors duration-300"
+                  onClick={() => handleViewAll("consumer")}
                 >
                   View All
                 </button>
@@ -345,7 +345,7 @@ const corporateProducts = [
             {!showAllCorporate && corporateProducts.length > 4 && (
               <div className="text-center mt-6">
                 <button
-      className="px-6 py-2 border-2 border-blue-600 text-blue-600 font-medium rounded-lg hover:bg-blue-600 hover:text-white transition-colors duration-300"
+                  className="px-6 py-2 border-2 border-blue-600 text-blue-600 font-medium rounded-lg hover:bg-blue-600 hover:text-white transition-colors duration-300"
                   onClick={() => handleViewAll("corporate")}
                 >
                   View All
