@@ -50,7 +50,8 @@ const Navbar = () => {
           {/* Logo */}
           <div className="flex-shrink-0 flex items-center">
             <img
-src={inspireLogo}              alt="Inspire Nest Logo"
+              src={inspireLogo}  
+              alt="Inspire Nest Logo"
               className="h-10 w-auto mr-2"
             />
           </div>
@@ -64,8 +65,8 @@ src={inspireLogo}              alt="Inspire Nest Logo"
                   onClick={() => scrollToSection(link.href)}
                   className={`px-3 py-2 text-sm font-medium transition-colors ${
                     activeSection === link.href
-                      ? "text-cyan-400 font-semibold"
-                      : "text-foreground hover:text-cyan-400"
+                      ? "text-blue-500 font-semibold"
+                      : "text-foreground hover:text-blue-500"
                   }`}
                 >
                   {link.name}

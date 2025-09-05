@@ -21,7 +21,7 @@ import {
 } from "lucide-react";
 
 const LandingPage = () => {
-  const [activeTab, setActiveTab] = useState("events");
+  const [activeTab, setActiveTab] = useState("consumer");
 
   const services = [
     {
@@ -45,18 +45,32 @@ const LandingPage = () => {
       description: "Building lasting relationships through celebration"
     }
   ];
+// Consumer Products / Events
+const consumerProducts = [
+  "Birthdays",
+  "Anniversaries",
+  "Weddings",
+  "Valentine's Day",
+  "Women's Day",
+  "National Celebrations",
+  "Personal Events",
+  "Cakes & Chocolates",
+  "Fresh Flowers",
+  "Personalized Gifts",
+  "Gift Vouchers",
+  "Celebration Hampers",
+  "Custom Arrangements",
+];
 
-  const events = [
-    "Birthdays", "Anniversaries", "Weddings", "Valentine's Day",
-    "Women's Day", "National Celebrations", "Personal Events",
-    "Corporate Milestones", "Achievement Awards", "Team Building"
-  ];
+// Corporate Products / Events
+const corporateProducts = [
+  "Corporate Milestones",
+  "Achievement Awards",
+  "Team Building",
+  "Corporate Gifts",
+  "Premium Collections",
+];
 
-  const products = [
-    "Cakes & Chocolates", "Fresh Flowers", "Personalized Gifts",
-    "Corporate Gifts", "Gift Vouchers", "Celebration Hampers",
-    "Custom Arrangements", "Premium Collections"
-  ];
 
   return (
     <div className="min-h-screen bg-background">
@@ -64,7 +78,7 @@ const LandingPage = () => {
       
     <section
       id="home"
-      className="pt-20 bg-gradient-to-r from-blue-600 via-indigo-500 to-blue-500 text-white relative overflow-hidden"
+      className="pt-20 bg-blue-500 text-white relative overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
         <div className="text-center">
@@ -97,18 +111,18 @@ const LandingPage = () => {
       <Button
         size="lg"
         className="relative text-lg px-10 py-4 rounded-full
-                  bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 
-                  text-white shadow-xl hover:scale-110 
+                  bg-gray-100
+                  text-gray-700 shadow-xl hover:scale-110 hover:bg-gray-100
                   transition-all duration-300 overflow-hidden"
       >
-        <span className="relative z-10">🚀 Explore Events</span>
+        <span className="relative z-10">🚀 Explore About Us</span>
         <span className="absolute inset-0 bg-white/20 blur-xl opacity-50 animate-pulse" />
       </Button>
 
       {/* Secondary Button - Glassmorphic */}
       <Button
         size="lg"
-        className="text-lg px-10 py-4 rounded-full font-semibold 
+        className="text-lg px-12 py-4 rounded-full font-semibold 
                   bg-white/10 backdrop-blur-lg border border-white/30 
                   text-white shadow-md hover:scale-105 hover:shadow-lg 
                   hover:bg-white/20 transition-all duration-300"
@@ -137,14 +151,14 @@ const LandingPage = () => {
 <p
   className="relative text-lg md:text-xl max-w-3xl mx-auto leading-relaxed 
              bg-gradient-to-r from-pink-50 via-white to-pink-50 
-             border-l-4 border-pink-500 px-6 py-6 rounded-lg shadow-md 
+             border-l-4 border-blue-500 px-6 py-6 rounded-lg shadow-md 
              text-gray-700 font-medium italic"
 >
-  ✨ <span className="font-semibold text-pink-600">At Inspire Nest</span>, our purpose goes beyond 
+  ✨ <span className="font-semibold text-blue-500">At Inspire Nest</span>, our purpose goes beyond 
   planning events or delivering gifts.  
-  We exist to <span className="font-bold text-red-500">bring people closer</span>, 
-  to <span className="font-bold text-yellow-500">spread joy</span>, and to 
-  <span className="font-bold text-purple-500"> create memories that last a lifetime</span>.  
+  We exist to <span className="font-bold text-blue-500">bring people closer</span>, 
+  to <span className="font-bold text-blue-500">spread joy</span>, and to 
+  <span className="font-bold text-blue-500"> create memories that last a lifetime</span>.  
   Every moment we touch is carefully crafted to make someone smile, strengthen relationships, 
   and celebrate life’s most precious milestones. 🌸
 </p>
@@ -260,90 +274,46 @@ const LandingPage = () => {
     </div>
 
     {/* Tabs */}
-    <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-<TabsList className="flex justify-center gap-4 max-w-lg mx-auto bg-gray-100 rounded-full p-1 shadow-sm">
-  <TabsTrigger
-    value="consumer"
-    className="rounded-full px-6 py-2.5 text-base font-semibold text-gray-700 
-               transition-all duration-300 hover:bg-pink-100 hover:text-pink-600
-               data-[state=active]:bg-pink-500 data-[state=active]:text-white data-[state=active]:shadow-md"
-  >
-    🎁 Consumers
-  </TabsTrigger>
 
-  <TabsTrigger
-    value="corporate"
-    className="rounded-full px-6 py-2.5 text-base font-semibold text-gray-700 
-               transition-all duration-300 hover:bg-blue-100 hover:text-blue-600
-               data-[state=active]:bg-blue-500 data-[state=active]:text-white data-[state=active]:shadow-md"
-  >
-    💼 Corporates
-  </TabsTrigger>
-</TabsList>
+<Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+  <TabsList className="grid w-full max-w-md mx-auto grid-cols-2 mb-8">
+    <TabsTrigger value="consumer" className="text-sm font-medium">
+      Consumer
+    </TabsTrigger>
+    <TabsTrigger value="corporate" className="text-sm font-medium">
+      Corporate
+    </TabsTrigger>
+  </TabsList>
 
+  {/* Consumer Content - visible by default */}
+  <TabsContent value="consumer" className="mt-8">
+    <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      {consumerProducts.map((item, index) => (
+        <Card key={index} className="p-4 text-center shadow-soft hover:shadow-elegant transition-shadow">
+          <CardContent className="pt-4">
+            <Gift className="h-8 w-8 text-primary mx-auto mb-2" />
+            <h3 className="font-semibold text-foreground">{item}</h3>
+          </CardContent>
+        </Card>
+      ))}
+    </div>
+  </TabsContent>
 
-   {/* Consumer Catalog */}
-{/* Consumer Catalog */}
-<TabsContent value="consumer" className="mt-12">
-  <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-    {[
-      "Birthdays 🎂",
-      "Anniversaries 💍",
-      "Weddings 💒",
-      "Cakes & Chocolates 🍫",
-      "Fresh Flowers 🌸",
-      "Personalized Gifts 🎨",
-      "Celebration Hampers 🧺",
-    ].map((item, index) => (
-      <Card
-        key={index}
-        className="group p-5 text-center rounded-2xl bg-gradient-to-r from-pink-50 to-red-50 
-                   shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-200"
-      >
-        <CardContent className="flex flex-col items-center justify-center">
-          <div className="w-14 h-14 mb-4 rounded-full 
-                          bg-gradient-to-tr from-pink-400 to-red-400 
-                          flex items-center justify-center shadow-sm">
-            <Gift className="h-7 w-7 text-white" />
-          </div>
-          <h3 className="text-base font-semibold text-gray-800">{item}</h3>
-        </CardContent>
-      </Card>
-    ))}
-  </div>
-</TabsContent>
+  {/* Corporate Content */}
+  <TabsContent value="corporate" className="mt-8">
+    <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      {corporateProducts.map((item, index) => (
+        <Card key={index} className="p-4 text-center shadow-soft hover:shadow-elegant transition-shadow">
+          <CardContent className="pt-4">
+            <Gift className="h-8 w-8 text-primary mx-auto mb-2" />
+            <h3 className="font-semibold text-foreground">{item}</h3>
+          </CardContent>
+        </Card>
+      ))}
+    </div>
+  </TabsContent>
+</Tabs>
 
-{/* Corporate Catalog */}
-<TabsContent value="corporate" className="mt-12">
-  <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-    {[
-      "Corporate Milestones 🏆",
-      "Team Building 🤝",
-      "Achievement Awards 🥇",
-      "Corporate Hampers 🎁",
-      "Branded Merchandise 🧢",
-      "Premium Collections 🌟",
-      "Employee Recognition 🎫",
-    ].map((item, index) => (
-      <Card
-        key={index}
-        className="group p-5 text-center rounded-2xl bg-gradient-to-r from-indigo-50 to-blue-50 
-                   shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-200"
-      >
-        <CardContent className="flex flex-col items-center justify-center">
-          <div className="w-14 h-14 mb-4 rounded-full 
-                          bg-gradient-to-tr from-indigo-500 to-blue-500 
-                          flex items-center justify-center shadow-sm">
-            <Calendar className="h-7 w-7 text-white" />
-          </div>
-          <h3 className="text-base font-semibold text-gray-800">{item}</h3>
-        </CardContent>
-      </Card>
-    ))}
-  </div>
-</TabsContent>
-
-    </Tabs>
   </div>
 </section>
 
