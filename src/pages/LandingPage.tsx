@@ -269,42 +269,49 @@ const corporateProducts = [
             
             <div className="relative">
               <Carousel
-                plugins={[
-                  Autoplay({
-                    delay: 3000,
-                  }),
-                ]}
-                opts={{
-                  align: "start",
-                  loop: true,
-                }}
-                className="w-full max-w-6xl mx-auto"
-              >
-                <CarouselContent className="-ml-2 md:-ml-4">
-                  {services.map((service) => {
-                    const Icon = service.icon;
-                    return (
-                      <CarouselItem key={service.title} className="pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/3">
-                        <Card className="text-center p-6 h-full shadow-soft hover:shadow-elegant transition-shadow">
-                          <CardContent className="pt-6">
-                            <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-4">
-                              <Icon className="h-8 w-8 text-primary-foreground" />
-                            </div>
-                            <h3 className="text-xl font-semibold mb-3 text-foreground">
-                              {service.title}
-                            </h3>
-                            <p className="text-muted-foreground">
-                              {service.description}
-                            </p>
-                          </CardContent>
-                        </Card>
-                      </CarouselItem>
-                    );
-                  })}
-                </CarouselContent>
-                <CarouselPrevious className="hidden sm:flex -left-12" />
-                <CarouselNext className="hidden sm:flex -right-12" />
-              </Carousel>
+  plugins={[
+    Autoplay({
+      delay: 2000, // ⏩ faster sliding (previously 3000ms)
+    }),
+  ]}
+  opts={{
+    align: "start",
+    loop: true,
+  }}
+  className="w-full max-w-6xl mx-auto"
+>
+  <CarouselContent className="-ml-2 md:-ml-4">
+    {services.map((service) => {
+      const Icon = service.icon;
+      return (
+        <CarouselItem
+          key={service.title}
+          className="
+            pl-2 md:pl-4
+            basis-1/2   /* 📱 Mobile: show 2 items */
+            sm:basis-1/2
+            lg:basis-1/3
+          "
+        >
+          <Card className="text-center p-6 h-full shadow-soft hover:shadow-elegant transition-shadow">
+            <CardContent className="pt-6">
+              <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                <Icon className="h-8 w-8 text-primary-foreground" />
+              </div>
+              <h3 className="text-xl font-semibold mb-3 text-foreground">
+                {service.title}
+              </h3>
+              <p className="text-muted-foreground">{service.description}</p>
+            </CardContent>
+          </Card>
+        </CarouselItem>
+      );
+    })}
+  </CarouselContent>
+  <CarouselPrevious className="hidden sm:flex -left-12" />
+  <CarouselNext className="hidden sm:flex -right-12" />
+</Carousel>
+
             </div>
           </div>
         </section>
