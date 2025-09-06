@@ -1,7 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
 import Navbar from "@/components/Navbar";
 import celebrationImage from "@/assets/celebration-gifts.jpg";
 import { 
@@ -19,7 +27,6 @@ import {
   ExternalLink, 
   PartyPopper
 } from "lucide-react";
-import TrustSection from "../components/TrustSection";
 
 const LandingPage = () => {
   const [activeTab, setActiveTab] = useState("consumer");
@@ -33,24 +40,39 @@ const LandingPage = () => {
 
   const services = [
     {
-      icon: Calendar,
-      title: "Event Organization",
-      description: "Professional planning for all your special moments"
+      icon: Heart,
+      title: "Care & Trust",
+      description: "You care, we understand your emotions deeply"
     },
     {
       icon: Gift,
-      title: "Gift Delivery",
-      description: "Thoughtful gifts delivered with care and precision"
+      title: "We Deliver",
+      description: "Quality gifts and services delivered with precision"
+    },
+    {
+      icon: PartyPopper,
+      title: "They Smile",
+      description: "Creating moments that bring joy and happiness"
+    },
+    {
+      icon: Calendar,
+      title: "Never Miss Dates",
+      description: "Remember every important occasion and celebration"
+    },
+    {
+      icon: Star,
+      title: "Surprise & Delight",
+      description: "Creating unexpected moments of pure joy"
     },
     {
       icon: Award,
-      title: "Vouchers & Recognition",
-      description: "Celebrate achievements with meaningful recognition"
+      title: "Recognize & Celebrate",
+      description: "Meaningful recognition for life's achievements"
     },
     {
-      icon: Heart,
-      title: "Stronger Connections",
-      description: "Building lasting relationships through celebration"
+      icon: Users,
+      title: "Strengthen Bonds",
+      description: "Building stronger relationships through thoughtful gestures"
     }
   ];
 // Consumer Products / Events
@@ -245,28 +267,46 @@ const corporateProducts = [
               </p>
             </div>
             
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {services.map((service) => {
-                const Icon = service.icon;
-                return (
-                  <Card key={service.title} className="text-center p-6 shadow-soft hover:shadow-elegant transition-shadow">
-                    <CardContent className="pt-6">
-                      <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-4">
-                        <Icon className="h-8 w-8 text-primary-foreground" />
-                      </div>
-                      <h3 className="text-xl font-semibold mb-3 text-foreground">
-                        {service.title}
-                      </h3>
-                      <p className="text-muted-foreground">
-                        {service.description}
-                      </p>
-                    </CardContent>
-                  </Card>
-                );
-              })}
+            <div className="relative">
+              <Carousel
+                plugins={[
+                  Autoplay({
+                    delay: 3000,
+                  }),
+                ]}
+                opts={{
+                  align: "start",
+                  loop: true,
+                }}
+                className="w-full max-w-6xl mx-auto"
+              >
+                <CarouselContent className="-ml-2 md:-ml-4">
+                  {services.map((service) => {
+                    const Icon = service.icon;
+                    return (
+                      <CarouselItem key={service.title} className="pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/3">
+                        <Card className="text-center p-6 h-full shadow-soft hover:shadow-elegant transition-shadow">
+                          <CardContent className="pt-6">
+                            <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                              <Icon className="h-8 w-8 text-primary-foreground" />
+                            </div>
+                            <h3 className="text-xl font-semibold mb-3 text-foreground">
+                              {service.title}
+                            </h3>
+                            <p className="text-muted-foreground">
+                              {service.description}
+                            </p>
+                          </CardContent>
+                        </Card>
+                      </CarouselItem>
+                    );
+                  })}
+                </CarouselContent>
+                <CarouselPrevious className="hidden sm:flex -left-12" />
+                <CarouselNext className="hidden sm:flex -right-12" />
+              </Carousel>
             </div>
           </div>
-          <TrustSection />  
         </section>
 
       {/* Catalog Section */}
@@ -300,7 +340,12 @@ const corporateProducts = [
 
           {/* Consumer Content */}
           <TabsContent value="consumer" className="mt-8">
-            <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            <div className="text-center mb-8">
+              <p className="text-gray-600 max-w-2xl mx-auto leading-relaxed">
+                Personal celebrations and meaningful moments for individuals and families. From birthdays to anniversaries, we help you celebrate life's precious milestones with thoughtful gifts and beautiful arrangements.
+              </p>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
               {(showAllConsumer ? consumerProducts : consumerProducts.slice(0, 4)).map(
                 (item, index) => (
                   <Card
@@ -329,7 +374,12 @@ const corporateProducts = [
 
           {/* Corporate Content */}
           <TabsContent value="corporate" className="mt-8">
-            <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            <div className="text-center mb-8">
+              <p className="text-gray-600 max-w-2xl mx-auto leading-relaxed">
+                Professional services designed for businesses and organizations. Strengthen team bonds, recognize achievements, and celebrate corporate milestones with our premium corporate solutions.
+              </p>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
               {(showAllCorporate ? corporateProducts : corporateProducts.slice(0, 4)).map(
                 (item, index) => (
                   <Card
