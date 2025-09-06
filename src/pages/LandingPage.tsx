@@ -255,66 +255,66 @@ const corporateProducts = [
 </section>
 
 
-        {/* What We Do Section */}
-        <section className="py-20 bg-accent/30" id="wtu">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">
-                Why Trust Inspire Nest?
-              </h2>
-              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                We specialize in creating extraordinary experiences that bring people together
-              </p>
-            </div>
-            
-            <div className="relative">
-              <Carousel
-  plugins={[
-    Autoplay({
-      delay: 2000, // ⏩ faster sliding (previously 3000ms)
-    }),
-  ]}
-  opts={{
-    align: "start",
-    loop: true,
-  }}
-  className="w-full max-w-6xl mx-auto"
->
-  <CarouselContent className="-ml-2 md:-ml-4">
-    {services.map((service) => {
-      const Icon = service.icon;
-      return (
-        <CarouselItem
-          key={service.title}
-          className="
-            pl-2 md:pl-4
-            basis-1/2   /* 📱 Mobile: show 2 items */
-            sm:basis-1/2
-            lg:basis-1/3
-          "
-        >
-          <Card className="text-center p-6 h-full shadow-soft hover:shadow-elegant transition-shadow">
-            <CardContent className="pt-6">
-              <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-4">
-                <Icon className="h-8 w-8 text-primary-foreground" />
-              </div>
-              <h3 className="text-xl font-semibold mb-3 text-foreground">
-                {service.title}
-              </h3>
-              <p className="text-muted-foreground">{service.description}</p>
-            </CardContent>
-          </Card>
-        </CarouselItem>
-      );
-    })}
-  </CarouselContent>
-  <CarouselPrevious className="hidden sm:flex -left-12" />
-  <CarouselNext className="hidden sm:flex -right-12" />
-</Carousel>
+{/* What We Do Section */}
+<section className="py-20 bg-accent/30" id="wtu">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="text-center mb-16">
+      <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">
+        Why Trust Inspire Nest?
+      </h2>
+      <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
+        We specialize in creating extraordinary experiences that bring people together
+      </p>
+    </div>
 
-            </div>
-          </div>
-        </section>
+    <Carousel
+      plugins={[
+        Autoplay({
+          delay: 2500,
+        }),
+      ]}
+      opts={{
+        align: "start",
+        loop: true,
+      }}
+      className="w-full max-w-6xl mx-auto"
+    >
+      <CarouselContent className="-ml-2 md:-ml-4">
+        {services.map((service) => {
+          const Icon = service.icon;
+          return (
+            <CarouselItem
+              key={service.title}
+              className="
+                pl-2 md:pl-4
+                basis-full    /* 📱 Mobile: 1 item per view */
+                sm:basis-1/2  /* 📱 Tablets: 2 items */
+                lg:basis-1/3  /* 💻 Desktop: 3 items */
+              "
+            >
+              <Card className="text-center p-6 h-full shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300">
+                <CardContent className="flex flex-col items-center justify-center h-full">
+                  <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full flex items-center justify-center mb-4 shadow-md">
+                    <Icon className="h-8 w-8 text-white" />
+                  </div>
+                  <h3 className="text-lg md:text-xl font-semibold mb-2 text-gray-800">
+                    {service.title}
+                  </h3>
+                  <p className="text-sm md:text-base text-gray-600">
+                    {service.description}
+                  </p>
+                </CardContent>
+              </Card>
+            </CarouselItem>
+          );
+        })}
+      </CarouselContent>
+      <CarouselPrevious className="hidden sm:flex -left-12" />
+      <CarouselNext className="hidden sm:flex -right-12" />
+    </Carousel>
+  </div>
+</section>
+
 
       {/* Catalog Section */}
  <section id="products" className="py-24 bg-gray-100">
